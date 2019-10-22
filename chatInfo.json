@@ -2,13 +2,13 @@
   "userList": [
     {
       "name": "user1",
-      "online": 1,
-      "id": "EfN602xNWv3z--luAAAi"
+      "online": 0,
+      "id": "xnTIAI3sfJ-iGO0jAAAE"
     },
     {
       "name": "user2",
       "online": 0,
-      "id": "RCR2RJyEdjA90rgRAAAE"
+      "id": "Zx86f7HgKoDyGtI7AAAC"
     }
   ],
   "messageList": [

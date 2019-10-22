@@ -33,16 +33,20 @@
 </template>
 
 <script>
+    import {mapState} from 'vuex';
+
     let timer = null;
     let count = 0;
     export default {
         props: ['showUserList', 'isLogin'],
+        computed: mapState(['userName']),
         methods: {
             changeSideBar() {
                 this.$emit('changeSideBar')
             },
             logout() {
-                this.$socket.emit('logout', JSON.parse(localStorage.getItem('userInfo')).name);
+                let userName = this.userName || JSON.parse(localStorage.getItem('userInfo')).name;
+                this.$socket.emit('logout', userName);
                 localStorage.removeItem('userInfo')
             },
             // 单击清空未上线用户列表，双击清空聊天记录列表

@@ -1,156 +1,30 @@
 {
   "userList": [
     {
-      "name": "66",
+      "name": "user1",
       "online": 1,
-      "id": "wEEL-bUpPGUU3WrcAAAC"
+      "id": "EfN602xNWv3z--luAAAi"
     },
     {
-      "name": "freind",
-      "online": 1,
-      "id": "tScCu8kPCtnvgMEnAAAD"
+      "name": "user2",
+      "online": 0,
+      "id": "RCR2RJyEdjA90rgRAAAE"
     }
   ],
   "messageList": [
     {
-      "name": "66",
+      "name": "user1",
       "textArr": [
-        "wadf"
+        "hello"
       ],
-      "sendTime": 1570779250435
+      "sendTime": 1550845745215
     },
     {
-      "name": "66",
+      "name": "user2",
       "textArr": [
-        "awf"
+        "world"
       ],
-      "sendTime": 1570779251808
-    },
-    {
-      "name": "66",
-      "textArr": [
-        "faw"
-      ],
-      "sendTime": 1570779252506
-    },
-    {
-      "name": "66",
-      "textArr": [
-        "f"
-      ],
-      "sendTime": 1570779252818
-    },
-    {
-      "name": "66",
-      "textArr": [
-        "af"
-      ],
-      "sendTime": 1570779253433
-    },
-    {
-      "name": "66",
-      "textArr": [
-        "awf"
-      ],
-      "sendTime": 1570779253995
-    },
-    {
-      "name": "66",
-      "textArr": [
-        "awf"
-      ],
-      "sendTime": 1570779254442
-    },
-    {
-      "name": "66",
-      "textArr": [
-        "af"
-      ],
-      "sendTime": 1570779254853
-    },
-    {
-      "name": "66",
-      "textArr": [
-        "awf"
-      ],
-      "sendTime": 1570779255341
-    },
-    {
-      "name": "66",
-      "textArr": [
-        "awf"
-      ],
-      "sendTime": 1570779256309
-    },
-    {
-      "name": "66",
-      "textArr": [
-        "afw"
-      ],
-      "sendTime": 1570779257901
-    },
-    {
-      "name": "66",
-      "textArr": [
-        "f"
-      ],
-      "sendTime": 1570779259357
-    },
-    {
-      "name": "66",
-      "textArr": [
-        "awfawf"
-      ],
-      "sendTime": 1570779264338
-    },
-    {
-      "name": "66",
-      "textArr": [
-        "awf"
-      ],
-      "sendTime": 1570779265850
-    },
-    {
-      "name": "66",
-      "textArr": [
-        "awf"
-      ],
-      "sendTime": 1570779267701
-    },
-    {
-      "name": "66",
-      "textArr": [
-        "好了"
-      ],
-      "sendTime": 1570779286740
-    },
-    {
-      "name": "freind",
-      "textArr": [
-        "嗯  好像可以了"
-      ],
-      "sendTime": 1570779296340
-    },
-    {
-      "name": "freind",
-      "textArr": [
-        "加一个  新消息来的 alert 一下 "
-      ],
-      "sendTime": 1570779329641
-    },
-    {
-      "name": "freind",
-      "textArr": [
-        "<script>alert(1)</script>"
-      ],
-      "sendTime": 1570779355841
-    },
-    {
-      "name": "66",
-      "textArr": [
-        "瓜皮"
-      ],
-      "sendTime": 1570779362366
+      "sendTime": 1570847216312
     }
   ]
 }

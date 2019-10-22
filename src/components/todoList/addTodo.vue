@@ -23,34 +23,23 @@
                 inputVal: ''
             }
         },
-        computed: {
-            ...mapState(['todoList'])
-        },
+        computed: mapState(['todoList']),
         methods: {
             ...mapActions(['addTodoList']),
             //添加Todo
             addTodo() {
-                if (this.inputVal.trim()) {
-                    if (this.todoList.every(el => el.todo !== this.inputVal)) {
-                        this.$emit('isChange');
-                        this.addTodoList(this.inputVal);
-                    } else {
-                        this.$q.notify({
-                            message: '该事项已存在！',
-                            color: 'amber',
-                            position: 'top-left',
-                            timeout: 1800
-                        });
-                    }
-                    this.inputVal = '';
-                } else {
-                    this.$q.notify({
-                        message: '添加不能为空！',
-                        color: 'amber',
+                if (!this.inputVal.trim()) return;
+                if (this.todoList.some(el => el.todo === this.inputVal)) {
+                    return this.$q.notify({
+                        message: '该事项已存在！',
+                        color: 'amber-7',
                         position: 'top-left',
                         timeout: 1800
                     });
                 }
+                this.$emit('isChange');
+                this.addTodoList(this.inputVal);
+                this.inputVal = '';
             }
         }
     }

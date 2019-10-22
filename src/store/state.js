@@ -1,6 +1,7 @@
 export const state = {
     todoList: [],
     visibilityFilter: '',
+    searchTodo: '',
 
     // 每个demo描述信息，只在首次加载显示
     onceIntroduces: {},

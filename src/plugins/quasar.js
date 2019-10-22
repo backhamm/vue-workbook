@@ -32,7 +32,7 @@ import {
     QSpinnerGears,
     QPopupEdit,
     QCardActions,
-    QChatMessage
+    QChatMessage,
 } from 'quasar'
 
 Vue.use(Quasar, {
@@ -64,7 +64,7 @@ Vue.use(Quasar, {
         QSpinnerGears,
         QPopupEdit,
         QCardActions,
-        QChatMessage
+        QChatMessage,
     },
     directives: {
         Ripple

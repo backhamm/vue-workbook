@@ -1,6 +1,6 @@
 <template>
     <div class="login-wrapper animated fadeIn">
-        <q-input v-model="userName" color="secondary" :input-style="{textAlign: 'center'}" placeholder="输入一个用户名"/>
+        <q-input v-model="userName" color="secondary" :input-style="{textAlign: 'center'}" placeholder="输入一个用户名" @keyup.13="login"/>
         <q-btn
                 :loading="loading"
                 :percentage="percentage"
@@ -28,9 +28,7 @@
                 percentage: 0
             }
         },
-        computed: {
-            ...mapState(['isConnect'])
-        },
+        computed: mapState(['isConnect']),
         methods: {
             ...mapActions(['setUserName']),
             // 点击登录后显示按钮的过渡效果

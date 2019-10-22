@@ -34,20 +34,22 @@
             betterTime(val) {
                 return val < 10 ? '0' + val : val
             },
+            // 发送时间
             sendTime(val) {
                 let sendTime = new Date(val);
                 let now = new Date();
-                if (sendTime.getFullYear() !== now.getFullYear() && sendTime.getMonth() !== now.getMonth() && sendTime.getDate() !== now.getDate()) {
+                // 当年月日不相同时(不是当天发送)，按 '年/月/日' 的格式显示消息发送时间
+                if (sendTime.getFullYear() !== now.getFullYear() || sendTime.getMonth() !== now.getMonth() || sendTime.getDate() !== now.getDate()) {
                     return `${sendTime.getFullYear()}/${this.betterTime(sendTime.getMonth() + 1)}/${this.betterTime(sendTime.getDate())}`
                 } else {
+                    // 否则按 '时:分:秒'的格式显示消息发送时间
                     return `${this.betterTime(sendTime.getHours())}:${this.betterTime(sendTime.getMinutes())}:${this.betterTime(sendTime.getSeconds())}`
                 }
             }
         },
-        computed: {
-            ...mapState(['chatInfo', 'userName']),
-        },
+        computed: mapState(['chatInfo', 'userName']),
         watch: {
+            // 监听消息列表，当有人push消息时，自动将消息列表滚动到最底部
             'chatInfo.messageList'() {
                 this.$nextTick(() => {
                     let listHeight = document.getElementsByClassName('chat-scroll-wrapper')[0].offsetHeight;

@@ -1,6 +1,6 @@
 <template>
     <div class="chat-input">
-        <q-input bottom-slots v-model="inputVal" @keyup.13="sendMessage" color="secondary">
+        <q-input bottom-slots v-model="inputVal" @keyup.13="sendMessage" autofocus color="secondary">
             <template v-slot:append>
                 <q-icon name="send" @click="sendMessage" class="cursor-pointer" />
             </template>
@@ -16,9 +16,7 @@
                 inputVal: ''
             }
         },
-        computed: {
-            ...mapState(['userName'])
-        },
+        computed: mapState(['userName']),
         methods: {
             sendMessage() {
                 if (!this.inputVal) return;

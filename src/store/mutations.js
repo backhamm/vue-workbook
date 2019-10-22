@@ -1,4 +1,5 @@
 export const mutations = {
+    // 公用的mutations，可根据传入的key值，改变不同的state值
     SET_STATE(state, [key, val]) {
         state[key] = val
     },

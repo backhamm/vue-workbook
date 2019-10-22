@@ -22,8 +22,22 @@ export const todoListActions = {
     },
 
     // 删除todo
-    spliceTodoList({commit}, val) {
-        commit('SPLICE_STATE', ['todoList', val])
+    spliceTodoList({commit, state}, val) {
+        let index = state.todoList.findIndex(el => el.todo === val);
+        commit('SPLICE_STATE', ['todoList', index])
+    },
+
+    // 搜素todo
+    setSearchTodo ({commit}, val) {
+        commit('SET_STATE', ['searchTodo', val])
+    },
+
+    // 更改todo内容
+    updateTodoList ({commit, state}, [oldTodo, newTodo]) {
+        let todoList = JSON.parse(JSON.stringify(state.todoList));
+        let index = todoList.findIndex(el => el.todo === oldTodo);
+        todoList[index].todo = newTodo;
+        commit('SET_STATE', ['todoList', todoList])
     }
 };
 

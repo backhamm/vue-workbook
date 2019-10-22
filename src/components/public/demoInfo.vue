@@ -6,8 +6,10 @@
             <br>
             <div class="text-subtitle2">{{textList.technology}}</div>
             <br>
-            <!--<div class="text-subtitle2">（部分写法只是为了让运用的技术更广泛才加入的，可能会显得有些多余）</div>-->
-            <!--<br>-->
+            <div class="text-subtitle2">{{textList.description}}</div>
+            <br>
+            <div class="text-subtitle2">（部分写法只是为了让运用的技术更广泛才加入的，可能会显得有些多余）</div>
+            <br>
             <div class="text-subtitle2">注： 在控制台切换手机/PC模式时，需刷新页面</div>
             <br>
         </q-card-section>
@@ -32,9 +34,7 @@
             }
         },
         props: ['textList'],
-        computed: {
-            ...mapState(['onceIntroduces'])
-        },
+        computed: mapState(['onceIntroduces']),
         methods: {
             ...mapActions(['setIntroduces']),
             // 下一步，进入todoList主页面，点击后当前路由下不再显示该组件
@@ -64,6 +64,6 @@
 <style lang="stylus" scoped>
     .my-card
         max-width: 80%
-        margin 50px auto 0
+        margin 50px auto
         font-size .2rem
 </style>

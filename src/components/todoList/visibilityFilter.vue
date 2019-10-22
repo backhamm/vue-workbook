@@ -29,9 +29,7 @@
                 ]
             }
         },
-        computed: {
-            ...mapState(['visibilityFilter'])
-        },
+        computed: mapState(['visibilityFilter']),
         methods: {
             ...mapActions(['setVisibilityFilter']),
 

@@ -8,6 +8,8 @@
     "lint": "vue-cli-service lint"
   },
   "dependencies": {
+    "express": "^4.17.1",
+    "socket.io": "^2.3.0",
     "@quasar/extras": "^1.0.0",
     "animate.css": "^3.7.2",
     "core-js": "^2.6.5",

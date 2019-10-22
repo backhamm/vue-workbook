@@ -1,9 +1,10 @@
 <template>
     <div>
-        <div class="todo-item q-pa-md" v-for="(val, i) of todos" :key="val.todo">
-            <q-card class="my-card">
+        <!--特殊处理key值，既要保证唯一性，又要在每次todos列表改变时而改变(保证唯一性是为了在非'全部'状态下，向右滑动区块后，区块能正常显示，保持可变性是为了每次todos列表改变时，保证每个todo的视差背景图能够重新正确的渲染)-->
+        <div class="q-pa-md" v-for="(val, i) of todoList" :key="val.todo + i">
+            <q-card>
                 <q-parallax src="bg.jpg" :height="150"/>
-                <q-slide-item @left="(params) => onLeft(params, val.todo)" @right="onRight(i)">
+                <q-slide-item @left="(params) => onLeft(params, val.todo)" @right="onRight(val.todo)">
                     <template v-slot:left>
                         <q-icon :name="val.completed ? 'alarm_on' : 'alarm'"/>
                         {{val.completed ? '已完成' : '进行中'}}
@@ -24,6 +25,15 @@
                         </q-btn>
                         <div class="text-h6" :style="{textDecoration: val.completed ? 'line-through' : 'none'}">
                             {{val.todo}}
+                            <q-tooltip
+                                    transition-show="scale"
+                                    transition-hide="scale"
+                            >
+                                点击修改
+                            </q-tooltip>
+                            <q-popup-edit v-model="newTodo" color="secondary" @save="updateTodo(val.todo)" buttons label-set="确定" label-cancel="取消">
+                                <q-input v-model="newTodo" color="secondary" dense autofocus />
+                            </q-popup-edit>
                         </div>
                         <div class="text-subtitle2">
                             <q-icon name="keyboard_arrow_left" />
@@ -46,43 +56,61 @@
 </template>
 
 <script>
-    import {mapState, mapActions} from 'vuex';
+    import {mapState, mapGetters, mapActions} from 'vuex';
+
     export default {
-        computed: {
-            ...mapState(['todoList', 'visibilityFilter']),
-            todos() {
-                switch (this.visibilityFilter) {
-                    case '进行中':
-                        return this.todoList.filter(el => !el.completed);
-                    case '已完成':
-                        return this.todoList.filter(el => el.completed);
-                    case '全部':
-                    default:
-                        return this.todoList.map(el => el);
-                }
+        data() {
+            return {
+                newTodo: ''
             }
         },
+        computed: {
+            ...mapState(['visibilityFilter', 'searchTodo', 'todoList']),
+            ...mapGetters(['doneTodoList']),
+            todoList() {
+                let searchTodo = this.searchTodo.trim();
+                // 当搜索框有值时，将todos列表进行过滤
+                return searchTodo ? this.doneTodoList.filter(el => el.todo.indexOf(searchTodo) > -1) : this.doneTodoList;
+            }
+        },
+        mounted() {
+            this.$emit('isChange');
+        },
         methods: {
-            ...mapActions(['addTodoList', 'toggleTodoList', 'spliceTodoList']),
+            ...mapActions(['addTodoList', 'toggleTodoList', 'spliceTodoList', 'updateTodoList']),
 
-            // 改变Todo完成状态（点击左侧按钮或向右滑动区块）
+            updateTodo(oldTodo) {
+                // 当修改框不为空时继续判断修改的值是否已经存在于todoList里
+                this.newTodo && (this.todoList.some(el => el.todo === this.newTodo) ? this.$q.notify({
+                    message: '该事项已存在！',
+                    color: 'deep-orange',
+                    position: 'top-left',
+                    timeout: 1800
+                }) : this.updateTodoList([oldTodo, this.newTodo]));
+                this.newTodo = ''
+            },
+            // 点击左侧按钮或向右滑动区块来改变Todo的状态(进行中/已完成)
             onLeft(reset, todo) {
+                // 当前没有选中显示全部时，切换状态将触发fade过渡动画
                 this.visibilityFilter !== '全部' && this.$emit('isChange');
                 if (typeof reset === 'string') {
+                    // 点击左侧按钮时触发
                     this.toggleTodoList(reset);
                 } else {
+                    // 向右滑动区块时触发
                     this.toggleTodoList(todo);
+                    // 当前选中显示'全部'时向右滑动区块将触发区块回弹
                     this.visibilityFilter === '全部' && this.finalize(reset.reset)
                 }
             },
 
             // 删除Todo（向左滑动区块）
-            onRight(index) {
+            onRight(todo) {
                 this.$emit('isChange');
-                this.spliceTodoList(index);
+                this.spliceTodoList(todo);
             },
 
-            // Todo详情区块向右滑动后复原
+            // Todo详情区块滑动后复原
             finalize(reset) {
                 this.timer = setTimeout(() => {
                     reset();

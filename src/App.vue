@@ -50,12 +50,12 @@
     import DemoList from './components/public/demoList';
     import UserList from './components/chatApp/userList';
     import Logout from './components/chatApp/logout';
-    export default {
 
+    export default {
         data() {
             return {
                 drawer: false,
-                // 侧边栏列表
+                // 侧边栏demo列表
                 sidebarList: [
                     {link: '/chatApp', icon: 'star', title: 'chatApp'},
                     {link: '/todoList', icon: 'inbox', title: 'todoList'}
@@ -67,6 +67,7 @@
             this.autoLogin();
         },
         sockets: {
+            // 接收服务端发送的登录信息
             loginSuccess(data) {
                 this.$q.notify({
                     message: data.message,
@@ -105,11 +106,14 @@
                     {todo: '吃饭', completed: false},
                     {todo: '睡觉', completed: true},
                     {todo: '敲代码', completed: false},
+                    {todo: '再吃饭', completed: false},
+                    {todo: '再睡觉', completed: true},
+                    {todo: '再敲代码', completed: false}
                 ];
                 this.setTodoList(initTodoList);
                 this.setVisibilityFilter();
             },
-            // 登录后显示切换按钮，用于切换demo列表和聊天用户列表
+            // 切换按钮(登录后显示)，用于切换demo列表和聊天用户列表
             changeSideBar() {
                 this.setShowUserList(!this.showUserList)
             }
@@ -128,12 +132,10 @@
     .q-layout-container
         background url('../public/bg.jpg') no-repeat center / cover
 
-        >>>
-            .q-drawer
+        >>> .q-drawer
                 background rgba(255, 255, 255, .6)
 
-    >>>
-        .q-img__content
+    >>> .q-img__content
             border-right: 1px solid rgb(221, 221, 221)
 
             div
@@ -143,4 +145,5 @@
         min-height 100vh
         text-align center
         background rgba(255, 255, 255, .8)
+        overflow-x hidden
 </style>

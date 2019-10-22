@@ -1,6 +1,8 @@
 <template>
     <div class="change-sidebar">
+
         <q-btn class="animated bounce" v-show="isLogin && !showUserList" @click="changeSideBar" round color="secondary" icon="keyboard_arrow_up" />
+
         <q-btn-group class="animated fadeIn" push  v-show="isLogin && showUserList">
             <q-btn push icon="power_settings_new" @click="logout">
                 <q-tooltip
@@ -23,7 +25,7 @@
                         transition-show="scale"
                         transition-hide="scale"
                 >
-                    单击清空未上线用户列表，双击清空聊天列表
+                    单击清空未上线用户，双击清空聊天信息
                 </q-tooltip>
             </q-btn>
         </q-btn-group>
@@ -43,6 +45,7 @@
                 this.$socket.emit('logout', JSON.parse(localStorage.getItem('userInfo')).name);
                 localStorage.removeItem('userInfo')
             },
+            // 单击清空未上线用户列表，双击清空聊天记录列表
             clearList() {
                 count++;
                 if (!timer) {
